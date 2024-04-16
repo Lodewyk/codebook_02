@@ -1,6 +1,6 @@
 {
   "name": "simple-codebook",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "files": [
     "dist"
@@ -20,7 +20,7 @@
     "@simple-codebook/local-client": "^1.0.0"
   },
   "devDependencies": {
-    "@simple-codebook/local-api": "^1.0.0",
+    "@simple-codebook/local-api": "^1.0.1",
     "@types/node": "^20.8.4",
     "commander": "^11.0.0",
     "esbuild": "0.8.26",
