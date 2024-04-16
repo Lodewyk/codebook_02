@@ -13,8 +13,17 @@ export const persistMiddleware = ({
 }) => {
     let timer: any;
 
-    return (next: (action: Action) => void) => {
-        return (action: Action) => {
+    /**
+     * Annotating these as "action: Action" instead of "action: any" causes store.ts to throw 
+     * a "No overload matches this call." error when passing "persistMiddleware" into applyMiddleware.
+     * 
+     * The redux type def specifies that the middleware being passed in will be of type "any" so we
+     * need to match that signature. 
+     * 
+     * Time wasted: At least 30 minutes, trying to find some error in my middleware itself.
+     */
+    return (next: (action: any) => void) => {
+        return (action: any) => {
             next(action);
 
             if ([ActionType.MOVE_CELL, ActionType.UPDATE_CELL, ActionType.INSERT_CELL_AFTER, ActionType.DELETE_CELL].includes(action.type)) {
