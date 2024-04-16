@@ -1,4 +1,5 @@
 import { ActionType } from "../action-types";
+import axios from 'axios';
 import { 
     Action,
     DeleteCellAction, 
@@ -7,7 +8,7 @@ import {
     MoveCellAction, 
     UpdateCellAction
 } from "../actions";
-import { CellTypes } from "../cell";
+import { Cell, CellTypes } from "../cell";
 import { Dispatch } from 'redux';
 import bundle from '../../bundler';
 
@@ -73,3 +74,41 @@ export const createBundle = (cellId: string, userInput: string) => {
         })
     }
 }
+
+export const fetchCells = () => {
+    return async (dispatch: Dispatch<Action>) => {
+        dispatch({ type: ActionType.FETCH_CELLS });
+        try {
+            const { data }: { data: Cell[] } = await axios.get('/cells');
+
+            dispatch({ type: ActionType.FETCH_CELLS_COMPLETE, payload: data });
+        } catch (error) {
+            if (error instanceof Error) {
+                dispatch({
+                    type: ActionType.FETCH_CELLS_ERROR,
+                    payload: error.message
+                });
+            }
+        }
+    };
+};
+
+// export const 
+/*
+
+...
+Find the saveCells action creator's catch block and refactor it to look like this:
+
+...
+ 
+    } catch (err) {
+      if (err instanceof Error) {
+        dispatch({
+          type: ActionType.SAVE_CELLS_ERROR,
+          payload: err.message,
+        });
+      }
+    }
+ 
+...
+*/
