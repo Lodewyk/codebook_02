@@ -11,6 +11,7 @@ import {
 import { Cell, CellTypes } from "../cell";
 import { Dispatch } from 'redux';
 import bundle from '../../bundler';
+import { RootState } from "../reducers";
 
 // TODO split action creators into separate files for cell actions / bundle actions and export from here
 
@@ -71,7 +72,7 @@ export const createBundle = (cellId: string, userInput: string) => {
                     error: result.error
                 }
             }
-        })
+        });
     }
 }
 
@@ -93,22 +94,21 @@ export const fetchCells = () => {
     };
 };
 
-// export const 
-/*
+export const saveCells = () => {
+    return async(dispatch: Dispatch<Action>, getState: () => RootState) => {
+        const { cells: { data, order } } = getState();
 
-...
-Find the saveCells action creator's catch block and refactor it to look like this:
+        const cells = order.map(id => data[id]);
 
-...
- 
-    } catch (err) {
-      if (err instanceof Error) {
-        dispatch({
-          type: ActionType.SAVE_CELLS_ERROR,
-          payload: err.message,
-        });
-      }
+        try {
+            await axios.post('/cells', { cells: cells });
+        } catch (error) {
+            if (error instanceof Error) {
+                dispatch({
+                    type: ActionType.SAVE_CELLS_ERROR,
+                    payload: error.message
+                });
+            }
+        }
     }
- 
-...
-*/
+}
