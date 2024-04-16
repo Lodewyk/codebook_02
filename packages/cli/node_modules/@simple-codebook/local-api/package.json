@@ -2,8 +2,12 @@
   "name": "@simple-codebook/local-api",
   "version": "1.0.0",
   "description": "",
-  "files": ["dist"],
-  "publishConfig": {"access": "public"},
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -19,9 +23,9 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@simple-codebook/local-client": "^1.0.0",
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "http-proxy-middleware": "^3.0.0",
-    "@simple-codebook/local-client": "^0.1.0"
+    "http-proxy-middleware": "^3.0.0"
   }
 }
