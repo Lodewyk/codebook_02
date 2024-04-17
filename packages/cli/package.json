@@ -17,12 +17,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "commander": "^11.0.0",
+    "@simple-codebook/local-api": "^1.0.1",
     "@simple-codebook/local-client": "^1.0.0"
   },
   "devDependencies": {
-    "@simple-codebook/local-api": "^1.0.1",
     "@types/node": "^20.8.4",
-    "commander": "^11.0.0",
     "esbuild": "0.8.26",
     "typescript": "^5.2.2"
   }
